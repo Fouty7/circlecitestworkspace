@@ -12,8 +12,21 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths: 
-            - output.txt    
+            - output.txt 
+  print_output_file:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: cat ~/output.txt
+
 workflows:
   say-hello-workflow:
     jobs:
       - save_hello_world_output
+  print-hello-world-file:
+    jobs:
+      - print_output_file:
+          requires:
+            - save_hello_world_output    
