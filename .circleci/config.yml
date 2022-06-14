@@ -9,6 +9,10 @@ jobs:
       - run:
           name: "Say hello"
           command: echo "Hello, World!" > ~/output.txt
+      - persist_to_workspace:
+          root: ~/
+          paths: 
+            - output.txt    
 workflows:
   say-hello-workflow:
     jobs:
